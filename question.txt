@@ -1,0 +1,6 @@
+// there will no downvote
+1. How to use method only ProUser have?
+2. When sign in failed, should throw exception or sout?
+3. How to decide who is pro, who is basic?
+4. How to update info on json text?
+5. Are there any better way to save json?
