@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.post.Post;
+
 import java.util.Scanner;
 
 public class PostController {
@@ -58,6 +60,7 @@ public class PostController {
 
     private static void create() {
 
+
     }
 
     private static void update() {
@@ -66,5 +69,14 @@ public class PostController {
 
     private static void delete() {
 
+    }
+
+    private static Post inputNewPost(int userId) {
+        System.out.println("Input post title:");
+        String title = scanner.next();
+        System.out.println("Input post content:");
+        String content = scanner.next();
+
+        return new Post(title, content, userId);
     }
 }

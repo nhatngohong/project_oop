@@ -3,7 +3,6 @@ package org.example.service;
 import org.example.controller.UserController;
 import org.example.database.UserDB;
 import org.example.dto.UserCredentialDto;
-import org.example.exception.SignInException;
 import org.example.user.BasicUser;
 import org.example.user.User;
 
@@ -22,7 +21,7 @@ public class UserService {
 
         BasicUser userSignUp = getUserSignUp(userCredential);
 
-        UserDB.save(userSignUp);
+        UserDB.create(userSignUp);
 
     }
 
@@ -34,7 +33,7 @@ public class UserService {
             System.out.println("Please sign in");
             return;
         }
-        currentUser.update(user.getUsername(), user.getPassword());
+        currentUser.modify(user.getUsername(), user.getPassword());
         UserDB.modify(currentUser);
     }
     public static void upvotePost(User user, int postId) {

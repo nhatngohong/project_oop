@@ -1,12 +1,13 @@
 package org.example.post;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.database.PostDB;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
@@ -17,7 +18,7 @@ public class Post {
 
     private String content;
 
-    private int userId;
+    private int ownerId;
 
     private List<Integer> tags;
 
@@ -30,7 +31,7 @@ public class Post {
         this.id = PostDB.findAll().size();
         this.title = title;
         this.content = content;
-        this.userId = userId;
+        this.ownerId = userId;
         this.tags = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.upvote = 0;

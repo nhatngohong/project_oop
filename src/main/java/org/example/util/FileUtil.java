@@ -27,7 +27,7 @@ public class FileUtil {
         return database;
     }
 
-    public static <T> void add(T object, String path) {
+    public static <T> void create(T object, String path) {
         try {
             FileWriter myWriter = new FileWriter(path, true);
             myWriter.write(JsonUtil.toJson(object) + "\n");

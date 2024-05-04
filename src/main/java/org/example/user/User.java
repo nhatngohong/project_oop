@@ -45,7 +45,7 @@ public abstract class User {
 
     abstract public void upvote();
 
-    public void update(String newUsername, String newPassword) {
+    public void modify(String newUsername, String newPassword) {
         this.username = newUsername;
         this.password = newPassword;
     }

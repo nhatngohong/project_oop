@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserCredentialDto {
+public class CommentSimpleDto {
 
-    private String username;
+    private int id;
 
-    private String password;
+    private int ownerId;
+
+    private int content;
 }
