@@ -1,35 +1,31 @@
 package org.example.util;
 
-import com.google.gson.Gson;
-import org.example.user.User;
-
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileUtil {
-    public static <T>  List<T> read(String path, Class<T> type)  {
-        List<T> objects = new ArrayList<>();
+    public static String read(String path) {
+        String database = null;
         try {
-            FileReader myObj = new FileReader(path);
-            Scanner myReader = new Scanner(myObj);
+            FileReader fileReader = new FileReader(path);
+            Scanner myReader = new Scanner(fileReader);
             while (myReader.hasNextLine()) {
-
-                String data = myReader.nextLine();
-                T object = (T) JsonUtil.toObject(data, type);
-                objects.add(object);
+                database = myReader.nextLine();
             }
-            myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("file not found");
         }
-        return objects;
+        return database;
     }
-    public static <T> void write(T object, String path, Class<T> type) {
+
+    public static <T> void write(T object, String path) {
         try {
-            FileWriter myWriter = new FileWriter(path, true);
-            myWriter.write("\n");
+            FileWriter myWriter = new FileWriter(path);
             myWriter.write(JsonUtil.toJson(object));
             myWriter.close();
         } catch (IOException e) {

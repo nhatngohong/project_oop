@@ -6,7 +6,6 @@ import org.example.dto.UserCredentialDto;
 import org.example.exception.SignInException;
 import org.example.user.BasicUser;
 import org.example.user.User;
-import org.example.util.FileUtil;
 
 import java.util.List;
 
@@ -14,28 +13,46 @@ public class UserService {
     public static void signin(UserCredentialDto userCredential) {
 
         List<User> users = UserDB.findAll();
-        UserController.currentUserId = getUserSignIn(userCredential, users);
+        UserController.currentUser = getUserSignIn(userCredential, users);
 
     }
 
-    public static void signup(UserCredentialDto signUpUser) {
+    public static void signup(UserCredentialDto userCredential) {
 
-        BasicUser user = new BasicUser(
-                UserDB.findAll().size(),
-                signUpUser.getUsername(),
-                signUpUser.getPassword());
-        FileUtil.write(user, "userdb.txt", User.class);
+        List<User> users = UserDB.findAll();
+
+        User userSignUp = getUserSignUp(userCredential);
+
+        users.add(userSignUp);
+
+        UserDB.save(users);
+
     }
 
-    private static int getUserSignIn(UserCredentialDto userCredential, List<User> database) {
+    public static void upvotePost(User user, int postId) {
+        
+    }
+
+    private static User getUserSignIn(UserCredentialDto userCredential, List<User> database) {
+
         String username = userCredential.getUsername();
         String password = userCredential.getPassword();
+
         for (User user : database) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user.getId();
+                return user;
             }
         }
         //TODO fix
         throw new SignInException("Incorrect username or password");
+    }
+
+    private static User getUserSignUp(UserCredentialDto signUpUser) {
+
+        return new BasicUser(
+                UserDB.findAll().size(),
+                signUpUser.getUsername(),
+                signUpUser.getPassword());
+
     }
 }

@@ -3,13 +3,14 @@ package org.example.controller;
 import lombok.Getter;
 import org.example.dto.UserCredentialDto;
 import org.example.service.UserService;
+import org.example.user.User;
 
 import java.util.Scanner;
 
 @Getter
 public class UserController {
 
-    public static int currentUserId = 0;
+    public static User currentUser = null;
 
     private static final String SIGN_IN = "signin";
 
@@ -17,9 +18,10 @@ public class UserController {
 
     private static final String EXIT = "exit";
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     public static void controller() {
 
-        Scanner scanner = new Scanner(System.in);
 
         boolean exit = false;
 
@@ -36,9 +38,6 @@ public class UserController {
                     break;
                 case EXIT:
                     exit = true;
-                    break;
-                default:
-                    System.out.println("No such command");
                     break;
             }
         }
@@ -65,8 +64,13 @@ public class UserController {
         System.out.println("Successfully sign up");
     }
 
+    private static void upvotePost(User user) {
+
+        int postId = scanner.nextInt();
+        UserService.upvotePost(user, postId);
+    }
+
     private static UserCredentialDto inputCredential() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your username:");
         String username = scanner.next();

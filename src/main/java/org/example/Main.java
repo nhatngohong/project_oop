@@ -7,7 +7,10 @@ import org.example.controller.UserController;
 import org.example.user.BasicUser;
 import org.example.user.ProUser;
 import org.example.user.User;
+import org.example.util.FileUtil;
+import org.example.util.JsonUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +21,9 @@ public class Main {
     public static void main(String[] args) {
 
 
+        List<User> users = JsonUtil.toObject(FileUtil.read("userdb.txt"), List.class);
+
+        System.out.println(13);
         while (true) {
             Scanner scanner = new Scanner(System.in);
 
