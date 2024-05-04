@@ -27,8 +27,15 @@ public class UserService {
     }
 
     public static void update(UserCredentialDto user) {
-        UserController.currentUser.update(user.getUsername(), user.getPassword());
-        UserDB.modify(UserController.currentUser);
+
+        User currentUser = UserController.currentUser;
+
+        if (currentUser == null) {
+            System.out.println("Please sign in");
+            return;
+        }
+        currentUser.update(user.getUsername(), user.getPassword());
+        UserDB.modify(currentUser);
     }
     public static void upvotePost(User user, int postId) {
 

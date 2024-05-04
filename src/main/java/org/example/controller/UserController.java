@@ -15,6 +15,7 @@ public class UserController {
     private static final String SIGN_IN = "signin";
 
     private static final String SIGN_UP = "signup";
+
     private static final String UPDATE = "update";
 
     private static final String EXIT = "exit";
@@ -72,11 +73,6 @@ public class UserController {
     }
 
     private static void update() {
-
-        if (currentUser == null) {
-            System.out.println("Please sign in");
-            return;
-        }
         System.out.println("Update username and password");
 
         UserCredentialDto user = inputCredential();
