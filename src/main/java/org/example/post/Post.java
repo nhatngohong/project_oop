@@ -2,8 +2,9 @@ package org.example.post;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.example.comment.Comment;
+import org.example.database.PostDB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,7 +17,22 @@ public class Post {
 
     private String content;
 
+    private int userId;
+
     private List<Integer> tags;
 
     private List<Integer> comments;
+
+    private int upvote;
+
+    public Post(String title, String content, int userId) {
+
+        this.id = PostDB.findAll().size();
+        this.title = title;
+        this.content = content;
+        this.userId = userId;
+        this.tags = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.upvote = 0;
+    }
 }

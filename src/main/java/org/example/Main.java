@@ -17,18 +17,16 @@ public class Main {
     private static final String USER_COMMAND = "user";
     private static final String POST_COMMAND = "post";
     private static final String COMMENT_COMMAND = "comment";
+    private static final String EXIT = "exit";
 
     public static void main(String[] args) {
 
-
-        List<User> users = JsonUtil.toObject(FileUtil.read("userdb.txt"), List.class);
-
-        System.out.println(13);
-        while (true) {
+        boolean exit = false;
+        while (!exit) {
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Input your command: ");
-            String command = scanner.nextLine();
+            System.out.print("Input your command: ");
+            String command = scanner.next();
 
             switch (command) {
                 case USER_COMMAND:
@@ -39,6 +37,12 @@ public class Main {
                     break;
                 case COMMENT_COMMAND:
                     CommentController.controller();
+                    break;
+                case EXIT:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("No such command");
                     break;
             }
         }

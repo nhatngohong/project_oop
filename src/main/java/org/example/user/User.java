@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.database.UserDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,8 @@ public abstract class User {
 
     private List<Integer> upvotedComments;
 
-    public User(int id, String username, String password) {
-        this.id = id;
+    public User(String username, String password) {
+        this.id = UserDB.findAll().size();
         this.username = username;
         this.password = password;
         this.myPosts = new ArrayList<>();
@@ -43,4 +44,9 @@ public abstract class User {
     }
 
     abstract public void upvote();
+
+    public void update(String newUsername, String newPassword) {
+        this.username = newUsername;
+        this.password = newPassword;
+    }
 }

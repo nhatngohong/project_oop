@@ -13,24 +13,25 @@ public class UserService {
     public static void signin(UserCredentialDto userCredential) {
 
         List<User> users = UserDB.findAll();
+
         UserController.currentUser = getUserSignIn(userCredential, users);
 
     }
 
     public static void signup(UserCredentialDto userCredential) {
 
-        List<User> users = UserDB.findAll();
+        BasicUser userSignUp = getUserSignUp(userCredential);
 
-        User userSignUp = getUserSignUp(userCredential);
-
-        users.add(userSignUp);
-
-        UserDB.save(users);
+        UserDB.save(userSignUp);
 
     }
 
+    public static void update(UserCredentialDto user) {
+        UserController.currentUser.update(user.getUsername(), user.getPassword());
+        UserDB.modify(UserController.currentUser);
+    }
     public static void upvotePost(User user, int postId) {
-        
+
     }
 
     private static User getUserSignIn(UserCredentialDto userCredential, List<User> database) {
@@ -44,15 +45,15 @@ public class UserService {
             }
         }
         //TODO fix
-        throw new SignInException("Incorrect username or password");
+        System.out.println("Incorrect username or password");
+        return null;
     }
 
-    private static User getUserSignUp(UserCredentialDto signUpUser) {
+    private static BasicUser getUserSignUp(UserCredentialDto signUpUser) {
 
         return new BasicUser(
-                UserDB.findAll().size(),
                 signUpUser.getUsername(),
-                signUpUser.getPassword());
-
+                signUpUser.getPassword()
+        );
     }
 }

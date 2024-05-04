@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 public class BasicUser extends User {
 
-    public BasicUser(int id, String username, String password) {
-        super(id, username, password);
+    public BasicUser(String username, String password) {
+        super(username, password);
     }
 
     @Override

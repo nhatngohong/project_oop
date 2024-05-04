@@ -15,6 +15,7 @@ public class UserController {
     private static final String SIGN_IN = "signin";
 
     private static final String SIGN_UP = "signup";
+    private static final String UPDATE = "update";
 
     private static final String EXIT = "exit";
 
@@ -26,8 +27,8 @@ public class UserController {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("User command: ");
-            String command = scanner.nextLine();
+            System.out.print("User command: ");
+            String command = scanner.next();
 
             switch (command) {
                 case SIGN_IN:
@@ -36,8 +37,14 @@ public class UserController {
                 case SIGN_UP:
                     signup();
                     break;
+                case UPDATE:
+                    update();
+                    break;
                 case EXIT:
                     exit = true;
+                    break;
+                default:
+                    System.out.println("No such command");
                     break;
             }
         }
@@ -62,6 +69,18 @@ public class UserController {
         UserService.signup(signUpUser);
 
         System.out.println("Successfully sign up");
+    }
+
+    private static void update() {
+
+        if (currentUser == null) {
+            System.out.println("Please sign in");
+            return;
+        }
+        System.out.println("Update username and password");
+
+        UserCredentialDto user = inputCredential();
+        UserService.update(user);
     }
 
     private static void upvotePost(User user) {
