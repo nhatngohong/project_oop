@@ -1,15 +1,13 @@
 package org.example.util;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class FileUtil {
     public static <T> List<T> read(String path, Class<T> type) {
@@ -27,9 +25,9 @@ public class FileUtil {
         return database;
     }
 
-    public static <T> void create(T object, String path) {
+    public static <T> void write(T object, String path) {
         try {
-            FileWriter myWriter = new FileWriter(path, true);
+            FileWriter myWriter = new FileWriter(path);
             myWriter.write(JsonUtil.toJson(object) + "\n");
             myWriter.close();
         } catch (IOException e) {
@@ -38,13 +36,42 @@ public class FileUtil {
         }
     }
 
-    public static void modify(String path, int id, String modifiedObject) {
+    public static <T> void modify(String path, T object, T modifiedObject, Class<T> type) {
+
+        File file = new File(path);
+
+        List<T> database = read(path, type);
+
+        for (T data: database) {
+            if (data.equals(object)) {
+                data = modifiedObject;
+            }
+        }
+
+        List<String> lines = database
+                .stream()
+                .map(JsonUtil::toJson)
+                .collect(Collectors.toList());
         try {
             Path filePath = Paths.get(path);
-            List<String> lines = Files.readAllLines(filePath);
-            lines.set(id, modifiedObject);
             Files.write(filePath, lines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static <T> void delete(String path, T object, Class<T> type) {
+
+        File file = new File(path);
+        List<T> database = read(path, type);
+        database.removeIf(data -> data.equals(object));
+        List<String> lines = database
+                .stream()
+                .map(JsonUtil::toJson)
+                .collect(Collectors.toList());
+        try {
+            Path filePath = Paths.get(path);
+            Files.write(filePath, lines);
         } catch (IOException e) {
             e.printStackTrace();
         }

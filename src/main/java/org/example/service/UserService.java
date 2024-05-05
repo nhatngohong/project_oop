@@ -1,8 +1,10 @@
 package org.example.service;
 
+import org.example.comment.Comment;
 import org.example.controller.UserController;
 import org.example.database.UserDB;
 import org.example.dto.UserCredentialDto;
+import org.example.post.Post;
 import org.example.user.BasicUser;
 import org.example.user.User;
 
@@ -26,17 +28,15 @@ public class UserService {
     }
 
     public static void update(UserCredentialDto user) {
+        
 
-        User currentUser = UserController.currentUser;
-
-        if (currentUser == null) {
-            System.out.println("Please sign in");
-            return;
-        }
-        currentUser.modify(user.getUsername(), user.getPassword());
-        UserDB.modify(currentUser);
     }
-    public static void upvotePost(User user, int postId) {
+
+    public static void upvotePost(User user, Post post) {
+
+    }
+
+    public static void upvoteComment(User user, Comment comment) {
 
     }
 

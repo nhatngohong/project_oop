@@ -1,7 +1,6 @@
 package org.example.database;
 
 import org.example.post.Post;
-import org.example.user.User;
 import org.example.util.FileUtil;
 import org.example.util.JsonUtil;
 
@@ -22,12 +21,12 @@ public class PostDB {
         return null;
     }
 
-    public static void modify(Post post) {
-        FileUtil.modify("postdb.txt", post.getId(), JsonUtil.toJson(post));
+    public static void modify(Post post, Post modifiedPost) {
+        FileUtil.modify("postdb.txt", post, modifiedPost, Post.class);
     }
 
     public static void create(Post post) {
-        FileUtil.create(post, "postdb.txt");
+        FileUtil.write(post, "postdb.txt");
     }
 
 }

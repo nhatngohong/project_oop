@@ -79,12 +79,6 @@ public class UserController {
         UserService.update(user);
     }
 
-    private static void upvotePost(User user) {
-
-        int postId = scanner.nextInt();
-        UserService.upvotePost(user, postId);
-    }
-
     private static UserCredentialDto inputCredential() {
 
         System.out.print("Enter your username:");

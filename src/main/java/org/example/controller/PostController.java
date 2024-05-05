@@ -70,13 +70,4 @@ public class PostController {
     private static void delete() {
 
     }
-
-    private static Post inputNewPost(int userId) {
-        System.out.println("Input post title:");
-        String title = scanner.next();
-        System.out.println("Input post content:");
-        String content = scanner.next();
-
-        return new Post(title, content, userId);
-    }
 }

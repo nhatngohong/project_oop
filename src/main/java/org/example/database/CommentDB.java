@@ -1,7 +1,6 @@
 package org.example.database;
 
 import org.example.comment.Comment;
-import org.example.post.Post;
 import org.example.util.FileUtil;
 import org.example.util.JsonUtil;
 
@@ -22,11 +21,11 @@ public class CommentDB {
         return null;
     }
 
-    public static void modify(Comment comment) {
-        FileUtil.modify("commentdb.txt", comment.getId(), JsonUtil.toJson(comment));
+    public static void modify(Comment comment, Comment modifiedComment) {
+        FileUtil.modify("commentdb.txt", comment, modifiedComment, Comment.class);
     }
 
     public static void create(Comment comment) {
-        FileUtil.create(comment, "commentdb.txt");
+        FileUtil.write(comment, "commentdb.txt");
     }
 }
