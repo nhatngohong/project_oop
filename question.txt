@@ -4,5 +4,5 @@
 3. How to decide who is pro, who is basic?
 //4. How to update info on json text?
 5. Are there any better way to save json?
-6. How to delete post, comment
+//6. How to delete post, comment
 7. generate id

@@ -1,5 +1,8 @@
 package org.example.controller;
 
+import org.example.service.CommentService;
+import org.example.user.User;
+
 import java.util.Scanner;
 
 public class CommentController {
@@ -41,7 +44,7 @@ public class CommentController {
     }
 
     private static void create() {
-
+        
     }
 
     private static void update() {
