@@ -27,7 +27,7 @@ public class FileUtil {
 
     public static <T> void write(T object, String path) {
         try {
-            FileWriter myWriter = new FileWriter(path);
+            FileWriter myWriter = new FileWriter(path, true);
             myWriter.write(JsonUtil.toJson(object) + "\n");
             myWriter.close();
         } catch (IOException e) {
@@ -42,12 +42,11 @@ public class FileUtil {
 
         List<T> database = read(path, type);
 
-        for (T data: database) {
-            if (data.equals(object)) {
-                data = modifiedObject;
+        for (int i = 0; i < database.size(); i++) {
+            if (database.get(i).equals(object)) {
+                database.set(i, modifiedObject);
             }
         }
-
         List<String> lines = database
                 .stream()
                 .map(JsonUtil::toJson)

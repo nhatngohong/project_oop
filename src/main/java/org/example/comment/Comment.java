@@ -4,25 +4,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.database.CommentDB;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class Comment {
 
-    private int id;
+    private Integer id;
 
     private String content;
 
-    private int postId;
+    private Integer postId;
 
-    private int ownerId;
+    private Integer ownerId;
 
-    private int upvote;
+    private List<Integer> upvotedIds;
 
     public Comment(String content, int postId, int userId) {
         this.id = CommentDB.findAll().size();
         this.content = content;
         this.postId = postId;
         this.ownerId = userId;
-        this.upvote = 0;
+        this.upvotedIds = new ArrayList<>();
     }
 }

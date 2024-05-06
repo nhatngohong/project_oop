@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.database.UserDB;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@type")
@@ -19,28 +16,16 @@ import java.util.List;
 )
 public abstract class User {
 
-    private int id;
+    private Integer id;
 
     private String username;
 
     private String password;
 
-    private List<Integer> myPosts;
-
-    private List<Integer> myComments;
-
-    private List<Integer> upvotedPosts;
-
-    private List<Integer> upvotedComments;
-
     public User(String username, String password) {
         this.id = UserDB.findAll().size();
         this.username = username;
         this.password = password;
-        this.myPosts = new ArrayList<>();
-        this.myComments = new ArrayList<>();
-        this.upvotedPosts = new ArrayList<>();
-        this.upvotedComments = new ArrayList<>();
     }
 
     abstract public void upvote();

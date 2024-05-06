@@ -1,2 +1,1 @@
-{"@type":"org.example.user.BasicUser","id":1,"username":"test","password":"123","myPosts":[],"myComments":[],"upvotedPosts":[],"upvotedComments":[]}
-{"@type":"org.example.user.BasicUser","id":2,"username":"newuser","password":"123","myPosts":[],"myComments":[],"upvotedPosts":[],"upvotedComments":[]}
+{"@type":"org.example.user.BasicUser","id":1,"username":"test","password":"123"}

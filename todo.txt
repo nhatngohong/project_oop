@@ -1,3 +1,6 @@
 1. accepted answer
 2. allow pro user to add tag to post
-3. find post by tag?
+3. get post including sorting and filtering (eg: find by tag)
+4. add downvote
+5. more validate in sign in sign up
+6. show user info(post created,comment created by user)

@@ -2,7 +2,6 @@ package org.example.database;
 
 import org.example.user.User;
 import org.example.util.FileUtil;
-import org.example.util.JsonUtil;
 
 import java.util.List;
 
@@ -27,5 +26,9 @@ public class UserDB {
 
     public static void modify(User user, User modifiedUser) {
         FileUtil.modify("userdb.txt", user, modifiedUser, User.class);
+    }
+
+    public static void delete(User user) {
+        FileUtil.delete("userdb.txt", user, User.class);
     }
 }

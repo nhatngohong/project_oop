@@ -7,24 +7,25 @@ import org.example.database.PostDB;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
 
-    private int id;
+    private Integer id;
 
     private String title;
 
     private String content;
 
-    private int ownerId;
+    private Integer ownerId;
 
     private List<Integer> tags;
 
     private List<Integer> comments;
 
-    private int upvote;
+    private List<Integer> upvotedIds;
 
     public Post(String title, String content, int userId) {
 
@@ -34,6 +35,6 @@ public class Post {
         this.ownerId = userId;
         this.tags = new ArrayList<>();
         this.comments = new ArrayList<>();
-        this.upvote = 0;
+        this.upvotedIds = new ArrayList<>();
     }
 }
