@@ -7,11 +7,11 @@ import org.example.database.PostDB;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.lang.Cloneable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Post implements Cloneable{
 
     private Integer id;
 
@@ -36,5 +36,9 @@ public class Post {
         this.tags = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.upvotedIds = new ArrayList<>();
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

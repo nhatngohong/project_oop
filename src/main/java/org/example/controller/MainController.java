@@ -8,7 +8,7 @@ public class MainController {
     private static final String COMMENT_COMMAND = "comment";
     private static final String EXIT = "exit";
 
-    public static void controller() {
+    public static void controller() throws CloneNotSupportedException {
         boolean exit = false;
         while (!exit) {
             Scanner scanner = new Scanner(System.in);

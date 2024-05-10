@@ -14,6 +14,13 @@ public class PostService {
 
         return PostDB.findById(id);
     }
-
-
+    public static void create(Post post){
+        PostDB.create(post);
+    }
+    public static void update(Post post, Post modifiedPost){
+        PostDB.modify(post, modifiedPost);
+    }
+    public static void delete(Post post){
+        PostDB.delete(post);
+    }
 }
