@@ -6,6 +6,9 @@ import org.example.util.FileUtil;
 import java.util.List;
 
 public class UserDB {
+
+    //TODO fix
+    private static final int CURRENT_ID = 0;
     public static List<User> findAll() {
         return FileUtil.read("userdb.txt", User.class);
     }

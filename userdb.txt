@@ -1,2 +1,2 @@
-{"@type":"org.example.user.BasicUser","id":1,"username":"test","password":"123"}
-{"@type":"org.example.user.BasicUser","id":1,"username":"abc","password":"123"}
+{"@type":"org.example.user.BasicUser","id":0,"username":"test","password":"123456","reputation":0}
+{"@type":"org.example.user.BasicUser","id":1,"username":"abc","password":"123","reputation":0}
