@@ -6,6 +6,7 @@ import org.example.database.UserDB;
 import org.example.dto.UserCredentialDto;
 import org.example.post.Post;
 import org.example.user.BasicUser;
+import org.example.user.ProUser;
 import org.example.user.User;
 
 import java.util.List;
@@ -28,7 +29,19 @@ public class UserService {
     }
 
     public static void update(UserCredentialDto user) {
-        
+        User current = UserController.currentUser;
+
+        User newUser;
+        if (current instanceof BasicUser) {
+            newUser = new BasicUser();
+        } else {
+            newUser = new ProUser();
+        }
+        newUser.setId(current.getId());
+        newUser.setUsername(current.getUsername());
+        newUser.setPassword(user.getPassword());
+
+        UserDB.modify(current, newUser);
 
     }
 

@@ -22,6 +22,10 @@ public abstract class User {
 
     private String password;
 
+    private int reputation;
+    
+    private static final int PRO_USER_THRESHOLD = 50;
+
     public User(String username, String password) {
         this.id = UserDB.findAll().size();
         this.username = username;
@@ -33,5 +37,21 @@ public abstract class User {
     public void modify(String newUsername, String newPassword) {
         this.username = newUsername;
         this.password = newPassword;
+    }
+
+    public void increaseReputation(int increase) {
+        this.reputation += increase;
+
+        if (this instanceof BasicUser && this.reputation >= PRO_USER_THRESHOLD) {
+            UserDB.delete(this);
+            
+            ProUser user = new ProUser();
+            user.setId(this.id);
+            user.setUsername(this.username);
+            user.setPassword(this.password);
+            user.setReputation(this.reputation);
+            
+            UserDB.create(user);
+        }
     }
 }
