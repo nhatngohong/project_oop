@@ -43,14 +43,15 @@ public abstract class User {
         this.reputation += increase;
 
         if (this instanceof BasicUser && this.reputation >= PRO_USER_THRESHOLD) {
-            UserDB.delete(this);
+
             
             ProUser user = new ProUser();
             user.setId(this.id);
             user.setUsername(this.username);
             user.setPassword(this.password);
             user.setReputation(this.reputation);
-            
+
+            UserDB.delete(this);
             UserDB.create(user);
         }
     }
