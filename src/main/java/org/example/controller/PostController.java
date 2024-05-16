@@ -60,7 +60,7 @@ public class PostController {
     private static void getAll() {
         List<PostSimpleDto> allPost = PostService.getAll();
         for (var post : allPost) {
-            System.out.println(JsonUtil.toPrettyJson(post));;
+            System.out.println(JsonUtil.toPrettyJson(post));
         }
     }
 
