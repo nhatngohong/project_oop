@@ -15,7 +15,7 @@ public class Comment {
 
     private String content;
 
-    private Integer postId;
+    private Post post;
 
     private Integer ownerId;
 

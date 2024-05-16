@@ -28,5 +28,8 @@ public class PostDB {
     public static void create(Post post) {
         FileUtil.write(post, "postdb.txt");
     }
+    public static void delete(Post post){
+        FileUtil.delete("postdb.txt", post, Post.class);
+    }
 
 }

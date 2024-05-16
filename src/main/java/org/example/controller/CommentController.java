@@ -40,11 +40,19 @@ public class CommentController {
                     break;
             }
         }
-
     }
 
     private static void create() {
-        System.out.println("cai dat 1 j do quan trong");
+        if (UserController.currentUser == null) {
+            System.out.println("Please sign in");
+            return;
+        }
+        System.out.println("Input your post you want to post: ");
+        int postId = scanner.nextInt();
+        System.out.println("Input your content: ");
+        String content = scanner.next();
+
+        CommentService.
     }
 
     private static void update() {
