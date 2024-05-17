@@ -14,7 +14,6 @@ public class TagDB {
     }
 
     public static Tag findById(int id) {
-
         List<Tag> database = findAll();
         for (Tag tag : database) {
             if (tag.getId() == id) {

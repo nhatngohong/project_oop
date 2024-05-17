@@ -33,7 +33,7 @@ public class PostService {
                 .stream()
                 .map(CommentDB::findById)
                 .toList();
-        return PostDB.findById(id).toDetailDto();
+        return post.toDetailDto(tags, comments);
     }
 
     public static void create(Post newPost) {

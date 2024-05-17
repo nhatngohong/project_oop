@@ -3,6 +3,7 @@ package org.example.comment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.database.CommentDB;
+import org.example.post.Post;
 
 import java.util.ArrayList;
 import java.util.List;
