@@ -13,8 +13,6 @@ public class PostSimpleDto {
 
     private int ownerId;
 
-    private List<Tag> tags;
-
     private int upvote;
 
     private String title;

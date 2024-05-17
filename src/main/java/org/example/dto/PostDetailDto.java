@@ -20,4 +20,6 @@ public class PostDetailDto {
     private String title;
 
     private String content;
+
+    private List<CommentSimpleDto> comments;
 }
