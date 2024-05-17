@@ -18,6 +18,7 @@ public class PostController {
     private static final String CREATE = "create";
     private static final String UPDATE = "update";
     private static final String DELETE = "delete";
+    private static final String UPVOTE = "upvote";
     private static final String EXIT = "exit";
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -45,6 +46,9 @@ public class PostController {
                     break;
                 case DELETE:
                     delete();
+                    break;
+                case UPVOTE:
+                    upvote();
                     break;
                 case EXIT:
                     exit = true;
@@ -93,7 +97,9 @@ public class PostController {
             System.out.println("Input ID post you want to update: ");
             Integer ID = scanner.nextInt();
             Post updatePost = createNewpost();
-            PostService.update(ID, updatePost);
+            String newTitle = updatePost.getTitle();
+            String newContent = updatePost.getContent();
+            PostService.update(ID, newTitle, newContent);
         }
     }
 
@@ -106,6 +112,17 @@ public class PostController {
             System.out.println("Input ID post you want to delete: ");
             Integer ID = scanner.nextInt();
             PostService.delete(ID);
+        }
+    }
+    private static void upvote(){
+        if (UserController.currentUser == null){
+            System.out.println("Please log in");
+            return;
+        }
+        else{
+            System.out.println("Input ID post you want to upvote: ");
+            Integer ID = scanner.nextInt();
+            PostService.upvote(ID);
         }
     }
     private static Post createNewpost (){
