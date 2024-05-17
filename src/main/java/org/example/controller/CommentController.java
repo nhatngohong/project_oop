@@ -40,11 +40,10 @@ public class CommentController {
                     break;
             }
         }
-
     }
 
     private static void create() {
-        System.out.println("cai dat 1 j do quan trong");
+
     }
 
     private static void update() {

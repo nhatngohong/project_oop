@@ -3,7 +3,11 @@ package org.example.post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.comment.Comment;
 import org.example.database.PostDB;
+import org.example.dto.CommentSimpleDto;
+import org.example.dto.PostDetailDto;
+import org.example.dto.PostSimpleDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +40,25 @@ public class Post {
         this.tags = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.upvotedIds = new ArrayList<>();
+    }
+    public PostSimpleDto toSimpleDto(){
+        return new PostSimpleDto(
+                this.getId(),
+                this.getOwnerId(),
+                this.getUpvotedIds().size(),
+                this.getTitle(),
+                this.getContent()
+                );
+    }
+    public PostDetailDto toDetailDto(List<Tag> tags, List<CommentSimpleDto> comments){
+        return new PostDetailDto(
+                this.getId(),
+                this.getOwnerId(),
+                tags,
+                this.getUpvotedIds().size(),
+                this.getTitle(),
+                this.getContent(),
+                comments
+        );
     }
 }
