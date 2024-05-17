@@ -1,6 +1,7 @@
 package org.example.database;
 
 import org.example.comment.Comment;
+import org.example.user.User;
 import org.example.util.FileUtil;
 import org.example.util.JsonUtil;
 
@@ -27,5 +28,9 @@ public class CommentDB {
 
     public static void create(Comment comment) {
         FileUtil.write(comment, "commentdb.txt");
+    }
+
+    public static void delete(Comment comment) {
+        FileUtil.delete("commentdb.txt", comment, Comment.class);
     }
 }
