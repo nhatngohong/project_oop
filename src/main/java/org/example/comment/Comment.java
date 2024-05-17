@@ -3,6 +3,7 @@ package org.example.comment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.database.CommentDB;
+import org.example.dto.CommentSimpleDto;
 import org.example.post.Post;
 
 import java.util.ArrayList;
@@ -28,5 +29,13 @@ public class Comment {
         this.postId = postId;
         this.ownerId = userId;
         this.upvotedIds = new ArrayList<>();
+    }
+
+    public CommentSimpleDto toSimpleDto() {
+        return new CommentSimpleDto(
+                this.id,
+                this.ownerId,
+                this.content
+        );
     }
 }

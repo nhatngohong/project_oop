@@ -5,6 +5,7 @@ import org.example.controller.UserController;
 import org.example.database.CommentDB;
 import org.example.database.PostDB;
 import org.example.database.TagDB;
+import org.example.dto.CommentSimpleDto;
 import org.example.dto.PostDetailDto;
 import org.example.dto.PostSimpleDto;
 import org.example.post.Post;
@@ -12,6 +13,7 @@ import org.example.post.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PostService {
@@ -31,12 +33,12 @@ public class PostService {
                 .stream()
                 .map(TagDB::findById)
                 .toList();
-        List<Comment> comments = commentIds
+        List<CommentSimpleDto> comments = commentIds
                 .stream()
-                .map(CommentDB::findById)
+                .map(CommentDB::findById).filter(Objects::nonNull)
+                .map(Comment::toSimpleDto)
                 .toList();
-        //return post.toDetailDto(tags, comments);
-        return null;
+        return post.toDetailDto(tags, comments);
     }
 
     public static void create(Post newPost) {
