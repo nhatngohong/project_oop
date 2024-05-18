@@ -72,7 +72,7 @@ public class PostController {
         System.out.println("Input ID post: ");
         int id = scanner.nextInt();
         PostDetailDto post = PostService.getById(id);
-        System.out.println(JsonUtil.toPrettyJson(post));
+        if (post != null) System.out.println(JsonUtil.toPrettyJson(post));
     }
 
 

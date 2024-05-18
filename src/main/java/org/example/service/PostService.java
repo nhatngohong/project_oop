@@ -14,7 +14,6 @@ import org.example.post.Tag;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class PostService {
     public static List<PostSimpleDto> getAll() {
@@ -26,16 +25,18 @@ public class PostService {
 
     public static PostDetailDto getById(int id) {
         Post post = PostDB.findById(id);
-        if (post == null) return null;
+        if (post == null) {
+            System.out.println("ID don't exist");
+            return null;
+        }
         List<Integer> tagIds = post.getTags();
-        List<Integer> commentIds = post.getComments();
         List<Tag> tags = tagIds
                 .stream()
                 .map(TagDB::findById)
                 .toList();
-        List<CommentSimpleDto> comments = commentIds
+        List<CommentSimpleDto> comments = CommentDB.findAll()
                 .stream()
-                .map(CommentDB::findById).filter(Objects::nonNull)
+                .filter(comment -> Objects.equals(comment.getPostId(), post.getId()))
                 .map(Comment::toSimpleDto)
                 .toList();
         return post.toDetailDto(tags, comments);
@@ -51,13 +52,12 @@ public class PostService {
             System.out.println("ID don't exist");
             return;
         }
-        if (post.getOwnerId() != UserController.currentUser.getId()){
+        if (post.getOwnerId() != UserController.currentUser.getId()) {
             System.out.println("You cannot update this post");
             return;
         }
         Post newPost = new Post();
         newPost.setId(post.getId());
-        newPost.setComments(post.getComments());
         newPost.setTags(post.getTags());
         newPost.setOwnerId(post.getOwnerId());
         newPost.setUpvotedIds(post.getUpvotedIds());
@@ -73,13 +73,14 @@ public class PostService {
             System.out.println("ID don't exist");
             return;
         }
-        if (post.getOwnerId() != UserController.currentUser.getId()){
+        if (post.getOwnerId() != UserController.currentUser.getId()) {
             System.out.println("You cannot delete this post");
             return;
         }
         PostDB.delete(post);
     }
-    public static void upvote(Integer ID){
+
+    public static void upvote(Integer ID) {
         Post post = PostDB.findById(ID);
         if (post == null) {
             System.out.println("ID don't exist");
@@ -87,7 +88,6 @@ public class PostService {
         }
         Post newPost = new Post();
         newPost.setId(post.getId());
-        newPost.setComments(post.getComments());
         newPost.setTags(post.getTags());
         newPost.setOwnerId(post.getOwnerId());
         newPost.setTitle(post.getTitle());
@@ -96,10 +96,9 @@ public class PostService {
 
         List<Integer> upvotedIds = new ArrayList<>(post.getUpvotedIds());
         Integer userCurrentId = UserController.currentUser.getId();
-        if (upvotedIds.contains(userCurrentId)){
+        if (upvotedIds.contains(userCurrentId)) {
             upvotedIds.remove(userCurrentId);
-        }
-        else{
+        } else {
             upvotedIds.add(userCurrentId);
         }
         newPost.setUpvotedIds(upvotedIds);

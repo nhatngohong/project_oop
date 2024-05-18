@@ -4,12 +4,15 @@ import org.example.comment.Comment;
 import org.example.controller.UserController;
 import org.example.database.CommentDB;
 import org.example.database.PostDB;
+import org.example.post.Post;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentService {
     public static void create(int postId, String content) {
-        if (PostDB.findById(postId) == null) {
+        Post post = PostDB.findById(postId);
+        if (post == null) {
             System.out.println("No such post");
             return;
         }
@@ -23,15 +26,25 @@ public class CommentService {
             System.out.println("No such comment");
             return;
         }
-        if (!Objects.equals(comment.getOwnerId(), UserController.currentUser.getId())) {
-            System.out.println("You can not update this comment");
+        Comment newComment = new Comment(comment);
+        newComment.setContent(newContent);
+        CommentDB.modify(comment, newComment);
+    }
+
+    public static void upvote(int commentId) {
+        Comment oldComment = CommentDB.findById(commentId);
+        if (oldComment == null) {
+            System.out.println("No such comment");
             return;
         }
-        Comment updatedComment = new Comment();
-        updatedComment.setId(comment.getId());
-        updatedComment.setContent(newContent);
-
-        CommentDB.modify(comment, updatedComment);
+        Comment newComment = new Comment(oldComment);
+        List<Integer> upvotedIds = new ArrayList<>(oldComment.getUpvotedIds());
+        if (upvotedIds.contains(UserController.currentUser.getId())) {
+            upvotedIds.remove(UserController.currentUser.getId());
+        } else {
+            upvotedIds.add(UserController.currentUser.getId());
+        }
+        CommentDB.modify(oldComment, newComment);
     }
 
     public static void delete(int commentId) {
@@ -40,11 +53,10 @@ public class CommentService {
             System.out.println("No such comment");
             return;
         }
-        if (!Objects.equals(comment.getOwnerId(), UserController.currentUser.getId())) {
+        if (comment.getOwnerId() != UserController.currentUser.getId()) {
             System.out.println("You can not delete this comment");
             return;
         }
-
         CommentDB.delete(comment);
     }
 }

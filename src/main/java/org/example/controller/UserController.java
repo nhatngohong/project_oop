@@ -18,6 +18,8 @@ public class UserController {
 
     private static final String UPDATE = "update";
 
+    private static final String ADD_TAG = "addtag";
+
     private static final String EXIT = "exit";
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -40,6 +42,9 @@ public class UserController {
                     break;
                 case UPDATE:
                     update();
+                    break;
+                case ADD_TAG:
+                    addTag();
                     break;
                 case EXIT:
                     exit = true;
@@ -76,7 +81,17 @@ public class UserController {
         System.out.println("Update username and password");
 
         UserCredentialDto user = inputCredential();
+
         UserService.update(user);
+    }
+
+    private static void addTag() {
+        System.out.println("Enter tag id:  ");
+        int tagId = scanner.nextInt();
+        System.out.println("Enter post id:  ");
+        int postId = scanner.nextInt();
+
+        UserService.addTag(tagId, postId);
     }
 
     private static UserCredentialDto inputCredential() {

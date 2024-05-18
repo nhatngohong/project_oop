@@ -31,6 +31,14 @@ public class Comment {
         this.upvotedIds = new ArrayList<>();
     }
 
+    public Comment(Comment comment) {
+        this.id = comment.getId();
+        this.content = comment.getContent();
+        this.postId = comment.getPostId();
+        this.ownerId = comment.getOwnerId();
+        this.upvotedIds = comment.getUpvotedIds();
+    }
+
     public CommentSimpleDto toSimpleDto() {
         return new CommentSimpleDto(
                 this.id,

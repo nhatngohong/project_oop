@@ -27,19 +27,24 @@ public class Post {
 
     private List<Integer> tags;
 
-    private List<Integer> comments;
-
     private List<Integer> upvotedIds;
 
     public Post(String title, String content, int userId) {
-
         this.id = PostDB.findAll().size();
         this.title = title;
         this.content = content;
         this.ownerId = userId;
         this.tags = new ArrayList<>();
-        this.comments = new ArrayList<>();
         this.upvotedIds = new ArrayList<>();
+    }
+
+    public Post(Post post) {
+        this.id = post.id;
+        this.title = post.title;
+        this.content = post.content;
+        this.ownerId = post.ownerId;
+        this.tags = post.tags;
+        this.upvotedIds = post.upvotedIds;
     }
     public PostSimpleDto toSimpleDto(){
         return new PostSimpleDto(

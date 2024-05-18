@@ -9,6 +9,7 @@ public class CommentController {
     private static final String CREATE = "create";
     private static final String UPDATE = "update";
     private static final String DELETE = "delete";
+    private static final String UPVOTE = "upvote";
     private static final String EXIT = "exit";
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -31,6 +32,9 @@ public class CommentController {
                 case DELETE:
                     delete();
                     break;
+                case UPVOTE:
+                    upvote();
+                    break;
                 case EXIT:
                     exit = true;
                     break;
@@ -44,27 +48,34 @@ public class CommentController {
 
     private static void create() {
         if (notSignIn()) return;
-        System.out.print("Enter post id you want to comment: ");
+        System.out.println("Enter post id: ");
         int postId = scanner.nextInt();
-        System.out.print("Enter content you want to comment: ");
+        System.out.println("Enter content: ");
         String content = scanner.next();
         CommentService.create(postId, content);
     }
 
     private static void update() {
         if (notSignIn()) return;
-        System.out.print("Enter comment id you want to update: ");
+        System.out.println("Enter comment id: ");
         int commentId = scanner.nextInt();
-        System.out.print("Enter new content: ");
+        System.out.println("Enter new content: ");
         String newContent = scanner.next();
         CommentService.update(commentId, newContent);
     }
 
     private static void delete() {
         if (notSignIn()) return;
-        System.out.println("Enter comment id you want to delete: ");
+        System.out.println("Enter comment id: ");
         int commentId = scanner.nextInt();
         CommentService.delete(commentId);
+    }
+
+    private static void upvote() {
+        if (notSignIn()) return;
+        System.out.println("Enter comment id: ");
+        int commentId = scanner.nextInt();
+        CommentService.upvote(commentId);
     }
 
     private static boolean notSignIn() {
