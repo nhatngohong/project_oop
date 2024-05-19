@@ -50,7 +50,7 @@ public class UserController {
                     exit = true;
                     break;
                 default:
-                    System.out.println("No such command");
+                    System.out.println("Command does not exist");
                     break;
             }
         }
@@ -86,9 +86,9 @@ public class UserController {
     }
 
     private static void addTag() {
-        System.out.println("Enter tag id:  ");
+        System.out.println("Input tag id:  ");
         int tagId = scanner.nextInt();
-        System.out.println("Enter post id:  ");
+        System.out.println("Input post id:  ");
         int postId = scanner.nextInt();
 
         UserService.addTag(tagId, postId);
@@ -96,9 +96,9 @@ public class UserController {
 
     private static UserCredentialDto inputCredential() {
 
-        System.out.print("Enter your username:");
+        System.out.print("Input your username:");
         String username = scanner.next();
-        System.out.print("Enter your password:");
+        System.out.print("Input your password:");
         String password = scanner.next();
 
         return new UserCredentialDto(username, password);

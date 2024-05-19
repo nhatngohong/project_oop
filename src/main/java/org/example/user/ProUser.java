@@ -12,8 +12,5 @@ public class ProUser extends User {
         setPassword(user.getPassword());
         setReputation(user.getReputation());
     }
-    public void addTag() {
-        System.out.println("u can add tag");
-    }
 
 }

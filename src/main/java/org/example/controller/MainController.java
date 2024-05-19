@@ -30,7 +30,7 @@ public class MainController {
                     exit = true;
                     break;
                 default:
-                    System.out.println("No such command");
+                    System.out.println("Command does not exist");
                     break;
             }
         }

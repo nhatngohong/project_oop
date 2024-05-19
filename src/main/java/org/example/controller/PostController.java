@@ -1,11 +1,9 @@
 package org.example.controller;
 
-import org.example.database.PostDB;
 import org.example.dto.PostDetailDto;
 import org.example.dto.PostSimpleDto;
 import org.example.post.Post;
 import org.example.service.PostService;
-import org.example.util.FileUtil;
 import org.example.util.JsonUtil;
 
 import java.util.List;
@@ -54,7 +52,7 @@ public class PostController {
                     exit = true;
                     break;
                 default:
-                    System.out.println("No such command");
+                    System.out.println("Command does not exist");
                     break;
             }
         }
@@ -68,7 +66,7 @@ public class PostController {
         }
     }
 
-    private static void getById(){
+    private static void getById() {
         System.out.println("Input ID post: ");
         int id = scanner.nextInt();
         PostDetailDto post = PostService.getById(id);
@@ -76,24 +74,21 @@ public class PostController {
     }
 
 
-
     private static void create() {
-        if (UserController.currentUser == null){
+        if (UserController.currentUser == null) {
             System.out.println("Please log in");
             return;
-        }
-        else{
+        } else {
             Post newPost = createNewpost();
             PostService.create(newPost);
         }
     }
 
     private static void update() {
-        if (UserController.currentUser == null){
+        if (UserController.currentUser == null) {
             System.out.println("Please log in");
             return;
-        }
-        else{
+        } else {
             System.out.println("Input ID post you want to update: ");
             Integer ID = scanner.nextInt();
             Post updatePost = createNewpost();
@@ -104,28 +99,28 @@ public class PostController {
     }
 
     private static void delete() {
-        if (UserController.currentUser == null){
+        if (UserController.currentUser == null) {
             System.out.println("Please log in");
             return;
-        }
-        else{
+        } else {
             System.out.println("Input ID post you want to delete: ");
             Integer ID = scanner.nextInt();
             PostService.delete(ID);
         }
     }
-    private static void upvote(){
-        if (UserController.currentUser == null){
+
+    private static void upvote() {
+        if (UserController.currentUser == null) {
             System.out.println("Please log in");
             return;
-        }
-        else{
+        } else {
             System.out.println("Input ID post you want to upvote: ");
             Integer ID = scanner.nextInt();
             PostService.upvote(ID);
         }
     }
-    private static Post createNewpost (){
+
+    private static Post createNewpost() {
         System.out.println("Input title: ");
         String title = scanner.next();
         System.out.println("Input content: ");
