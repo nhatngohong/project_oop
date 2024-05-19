@@ -16,10 +16,4 @@ public class ProUser extends User {
         System.out.println("u can add tag");
     }
 
-    @Override
-    public void upvote() {
-
-    }
-
-
 }

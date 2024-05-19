@@ -61,7 +61,6 @@ public class FileUtil {
 
     public static <T> void delete(String path, T object, Class<T> type) {
 
-        File file = new File(path);
         List<T> database = read(path, type);
         database.removeIf(data -> data.equals(object));
         List<String> lines = database

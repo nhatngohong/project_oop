@@ -41,7 +41,7 @@ public abstract class User {
         this.reputation = user.reputation;
     }
 
-    abstract public void upvote();
+
 
     public void increaseReputation(int value) {
         User user;

@@ -16,8 +16,4 @@ public class BasicUser extends User {
         super(username, password);
     }
 
-    @Override
-    public void upvote() {
-
-    }
 }
