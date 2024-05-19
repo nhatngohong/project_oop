@@ -55,11 +55,15 @@ public class UserService {
         Tag tag = TagDB.findById(tagId);
 
         if (post == null) {
-            System.out.println("No such post");
+            System.out.println("Can not find post with id: " + postId);
             return;
         }
         if (tag == null) {
-            System.out.println("No such tag");
+            System.out.println("Can not find tag with id: " + tagId);
+            return;
+        }
+        if (UserController.currentUser instanceof BasicUser) {
+            System.out.println("You can not add tag as basic user");
             return;
         }
 

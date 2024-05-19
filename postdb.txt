@@ -1,2 +1,3 @@
-{"id":0,"title":"0","content":"0","ownerId":2,"tags":[],"upvotedIds":[2]}
-{"id":1,"title":"newpost","content":"howtolearn","ownerId":0,"tags":[0,2],"upvotedIds":[]}
+{"id":0,"title":"nhat","content":"nhatnhat","ownerId":1,"tags":[],"upvotedIds":[]}
+{"id":1,"title":"new","content":"new","ownerId":2,"tags":[],"upvotedIds":[2,1,0]}
+{"id":2,"title":"as","content":"as","ownerId":2,"tags":[],"upvotedIds":[]}

@@ -5,11 +5,14 @@ import org.example.controller.UserController;
 import org.example.database.CommentDB;
 import org.example.database.PostDB;
 import org.example.database.TagDB;
+import org.example.database.UserDB;
 import org.example.dto.CommentSimpleDto;
 import org.example.dto.PostDetailDto;
 import org.example.dto.PostSimpleDto;
 import org.example.post.Post;
 import org.example.post.Tag;
+import org.example.user.BasicUser;
+import org.example.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +85,7 @@ public class PostService {
 
     public static void upvote(Integer ID) {
         Post post = PostDB.findById(ID);
+        User currentUser = UserController.currentUser;
         if (post == null) {
             System.out.println("ID don't exist");
             return;
@@ -95,11 +99,20 @@ public class PostService {
 
 
         List<Integer> upvotedIds = new ArrayList<>(post.getUpvotedIds());
-        Integer userCurrentId = UserController.currentUser.getId();
+        Integer userCurrentId = currentUser.getId();
         if (upvotedIds.contains(userCurrentId)) {
             upvotedIds.remove(userCurrentId);
+
+            User owner = UserDB.findById(post.getOwnerId());
+
+            owner.increaseReputation(currentUser instanceof BasicUser ? -1 : -2);
+
         } else {
             upvotedIds.add(userCurrentId);
+
+            User owner = UserDB.findById(post.getOwnerId());
+
+            owner.increaseReputation(currentUser instanceof BasicUser ? 1 : 2);
         }
         newPost.setUpvotedIds(upvotedIds);
         PostDB.modify(post, newPost);
