@@ -11,5 +11,7 @@ public class CommentSimpleDto {
 
     private int ownerId;
 
+    private int upvote;
+
     private String content;
 }

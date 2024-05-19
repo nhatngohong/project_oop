@@ -43,6 +43,7 @@ public class Comment {
         return new CommentSimpleDto(
                 this.id,
                 this.ownerId,
+                this.upvotedIds.size(),
                 this.content
         );
     }
