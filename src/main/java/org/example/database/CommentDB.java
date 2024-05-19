@@ -3,6 +3,7 @@ package org.example.database;
 import org.example.comment.Comment;
 import org.example.user.User;
 import org.example.util.FileUtil;
+import org.example.util.IdUtil;
 import org.example.util.JsonUtil;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class CommentDB {
     }
 
     public static void create(Comment comment) {
+        comment.setId(IdUtil.generateForComment(findAll()));
         FileUtil.write(comment, "commentdb.txt");
     }
 

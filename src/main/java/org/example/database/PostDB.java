@@ -2,6 +2,7 @@ package org.example.database;
 
 import org.example.post.Post;
 import org.example.util.FileUtil;
+import org.example.util.IdUtil;
 import org.example.util.JsonUtil;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class PostDB {
     }
 
     public static void create(Post post) {
+        post.setId(IdUtil.generateForPost(findAll()));
         FileUtil.write(post, "postdb.txt");
     }
     public static void delete(Post post){

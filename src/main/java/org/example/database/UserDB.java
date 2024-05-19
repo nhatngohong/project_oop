@@ -2,6 +2,7 @@ package org.example.database;
 
 import org.example.user.User;
 import org.example.util.FileUtil;
+import org.example.util.IdUtil;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class UserDB {
     }
 
     public static void create(User user) {
+        user.setId(IdUtil.generateForUser(findAll()));
         FileUtil.write(user, "userdb.txt");
     }
 
